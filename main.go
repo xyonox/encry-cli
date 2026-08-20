@@ -130,7 +130,11 @@ func main() {
 			return
 		}
 
-		encryptFile(pw, *encryptFileFlag)
+		err = encryptFile(pw, *encryptFileFlag)
+		if err != nil {
+			fmt.Println("error encrypting file", err)
+			return
+		}
 	} else if *DecryptFileFlag != "" {
 		fmt.Println("decrypting file")
 		fmt.Println("Enter password the password for the encrypted file")
@@ -142,6 +146,10 @@ func main() {
 			return
 		}
 
-		decryptFile(pw, *DecryptFileFlag)
+		err = decryptFile(pw, *DecryptFileFlag)
+		if err != nil {
+			fmt.Println("error decrypting file", err)
+			return
+		}
 	}
 }

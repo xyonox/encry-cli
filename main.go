@@ -4,6 +4,7 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rand"
+	"flag"
 	"fmt"
 	"io"
 	"os"
@@ -99,5 +100,13 @@ func decryptFile(password []byte, file string) error {
 }
 
 func main() {
+	encryptFileFlag := flag.String("encrypt", "", "encrypt file, path to the file")
+	DecryptFileFlag := flag.String("decrypt", "", "decrypt file, path to the file")
+	flag.Parse()
 
+	if *encryptFileFlag != "" {
+		encryptFile([]byte("input please"), *encryptFileFlag)
+	} else if *DecryptFileFlag != "" {
+		decryptFile([]byte("input please"), *DecryptFileFlag)
+	}
 }

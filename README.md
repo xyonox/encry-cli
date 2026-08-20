@@ -60,3 +60,10 @@ After extracting the ZIP file, run this in PowerShell:
 
 By default, the installer copies `encry.exe` to `$HOME\.local\bin` and adds that
 directory to the user `PATH`. Open a new terminal afterwards.
+
+## Next Steps
+
+- [ ] make the encryption algorithm special to this cli
+- [ ] better printouts
+- [ ] encryption/decryption of directories
+...

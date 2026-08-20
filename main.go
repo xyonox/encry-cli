@@ -101,8 +101,8 @@ func decryptFile(password []byte, file string) error {
 }
 
 func main() {
-	encryptFileFlag := flag.String("encrypt", "", "encrypt file, path to the file")
-	DecryptFileFlag := flag.String("decrypt", "", "decrypt file, path to the file")
+	encryptFileFlag := flag.String("e", "", "encrypt file, path to the file")
+	DecryptFileFlag := flag.String("d", "", "decrypt file, path to the file")
 	flag.Parse()
 
 	if *encryptFileFlag != "" {
@@ -113,6 +113,17 @@ func main() {
 		pw, err := term.ReadPassword(int(os.Stdin.Fd()))
 		if err != nil {
 			fmt.Println("error reading password", err)
+			return
+		}
+
+		repeatpw, err := term.ReadPassword(int(os.Stdin.Fd()))
+		if err != nil {
+			fmt.Println("error reading password", err)
+			return
+		}
+
+		if string(pw) != string(repeatpw) {
+			fmt.Println("passwords don't match")
 			return
 		}
 

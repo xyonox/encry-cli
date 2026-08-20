@@ -10,6 +10,7 @@ import (
 	"os"
 
 	"golang.org/x/crypto/argon2"
+	"golang.org/x/term"
 )
 
 func DerireKey(password []byte, salt []byte) []byte {
@@ -105,8 +106,28 @@ func main() {
 	flag.Parse()
 
 	if *encryptFileFlag != "" {
-		encryptFile([]byte("input please"), *encryptFileFlag)
+		fmt.Println("encrypting file")
+		fmt.Println("Enter password the new password ")
+		fmt.Print("> ")
+
+		pw, err := term.ReadPassword(int(os.Stdin.Fd()))
+		if err != nil {
+			fmt.Println("error reading password", err)
+			return
+		}
+
+		encryptFile(pw, *encryptFileFlag)
 	} else if *DecryptFileFlag != "" {
-		decryptFile([]byte("input please"), *DecryptFileFlag)
+		fmt.Println("decrypting file")
+		fmt.Println("Enter password the new password ")
+		fmt.Print("> ")
+
+		pw, err := term.ReadPassword(int(os.Stdin.Fd()))
+		if err != nil {
+			fmt.Println("error reading password", err)
+			return
+		}
+
+		decryptFile(pw, *DecryptFileFlag)
 	}
 }

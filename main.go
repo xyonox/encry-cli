@@ -107,7 +107,7 @@ func main() {
 
 	if *encryptFileFlag != "" {
 		fmt.Println("encrypting file")
-		fmt.Println("Enter password the new password ")
+		fmt.Println("Enter password the password for the encrypted file")
 		fmt.Print("> ")
 
 		pw, err := term.ReadPassword(int(os.Stdin.Fd()))
@@ -115,6 +115,9 @@ func main() {
 			fmt.Println("error reading password", err)
 			return
 		}
+
+		fmt.Println("Enter password the password agian")
+		fmt.Print("> ")
 
 		repeatpw, err := term.ReadPassword(int(os.Stdin.Fd()))
 		if err != nil {
@@ -130,7 +133,7 @@ func main() {
 		encryptFile(pw, *encryptFileFlag)
 	} else if *DecryptFileFlag != "" {
 		fmt.Println("decrypting file")
-		fmt.Println("Enter password the new password ")
+		fmt.Println("Enter password the password for the encrypted file")
 		fmt.Print("> ")
 
 		pw, err := term.ReadPassword(int(os.Stdin.Fd()))
